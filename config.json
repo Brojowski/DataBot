@@ -1,0 +1,10 @@
+[
+  {
+    "cmd": "/help",
+    "description": "Provides a list of functions"
+  },
+  {
+    "cmd":"/help [command]",
+    "description":"Get more info on [command]"
+  }
+]
