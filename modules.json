@@ -1,0 +1,10 @@
+[
+  {
+    "name":"weather",
+    "isActive":true,
+    "path":"./modules/GetWeather.js",
+    "dependencies":[
+      "bot"
+    ]
+  }
+]
