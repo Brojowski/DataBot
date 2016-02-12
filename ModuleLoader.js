@@ -65,6 +65,8 @@ function loadDependencies(m, module)
 
 module.exports = {
     /**
+     * Allow custom dependencies to be added.
+     *
      * @param name: the name of the module
      * @param module: the object or function of the module
      */
@@ -83,5 +85,11 @@ module.exports = {
      *          }
      *      ]
      */
-    loadModulesFromList:fromList
+    loadModulesFromList:fromList,
+    /**
+     * @returns {Array}: The array of modules that are loaded.
+     */
+    getModules:function(){
+        return modules;
+    }
 };
