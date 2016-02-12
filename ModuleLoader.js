@@ -64,6 +64,24 @@ function loadDependencies(m, module)
 }
 
 module.exports = {
+    /**
+     * @param name: the name of the module
+     * @param module: the object or function of the module
+     */
     addModule: addModule,
+    /**
+     * Loads modules from a list
+     *
+     * @param rawModules: an array that contains
+     *      [
+     *          {
+     *              name: the name of the module
+     *              isActive: should the module be loaded
+     *              path: the directory path to load from
+     *              dependencies: an array of module names (strings) that
+     *                  this module require to be passed in when created
+     *          }
+     *      ]
+     */
     loadModulesFromList:fromList
 };
