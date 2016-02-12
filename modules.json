@@ -6,5 +6,13 @@
     "dependencies":[
       "bot"
     ]
+  },
+  {
+    "name":"test",
+    "isActive":true,
+    "path":"./modules/test.js",
+    "dependencies":[
+      "bot"
+    ]
   }
 ]
