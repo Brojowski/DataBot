@@ -8,6 +8,12 @@
     ]
   },
   {
+    "name":"keyboards",
+    "isActive":false,
+    "path":"./modules/KeyboardsModule.js",
+    "dependencies":[]
+  },
+  {
     "name":"test",
     "isActive":true,
     "path":"./modules/test.js",

@@ -16,38 +16,3 @@ moduleLoader.addModule("bot", bot);
 // Initialize modules.
 var rawModules = require("./modules.json");
 moduleLoader.loadModulesFromList(rawModules);
-
-var commands = [];
-var fs = require("fs");
-var dir = "./modules";
-fs.readdir(dir, function (err, files)
-{
-    if (!err)
-    {
-        for (var fNumber = 0; fNumber < files.length; fNumber++)
-        {
-            console.log(files[fNumber]);
-            fs.readFile(dir + "/" + files[fNumber], {encoding: "utf8"}, function (err, data)
-            {
-                if (!err)
-                {
-                    var regex = /\\(\/.*)\//g;
-                    commands.push.apply(commands,data.match(regex));
-                }else
-                {
-                    console.log(err);
-                }
-            });
-        }
-    }
-});
-
-bot.onText(/\/start/,function(msg){
-    bot.sendMessage(msg.from.id,"Hi",{
-        reply_markup:{
-            keyboard:[
-                commands
-            ]
-        }
-    });
-});
