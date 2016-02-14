@@ -17,8 +17,7 @@ function fromList(rawModules)
         {
             continue;
         }
-        addModule(m.name, module);
-        loadDependencies(m, module);
+        addModule(m.name, loadDependencies(m, module));
     }
 }
 function resolve(m)
@@ -55,12 +54,9 @@ function loadDependencies(m, module)
         {
             functionName += ',';
         }
-        else
-        {
-            functionName += ');';
-        }
-        eval(functionName);
     }
+    functionName += ");";
+    return eval(functionName);
 }
 
 module.exports = {
