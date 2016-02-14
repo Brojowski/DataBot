@@ -24,6 +24,7 @@ function addKeyboard(name, keyboardArray)
     keyboards.push(Keyboard(name, keyboardArray));
 }
 
+// TODO: Rewrite auto command generation from files.
 function generateFromModules()
 {
     var commands = [];
