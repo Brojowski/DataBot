@@ -59,6 +59,18 @@ function loadDependencies(m, module)
     return eval(functionName);
 }
 
+function getModuleByName(name)
+{
+    for (var i = 0; i < modules.length; i++)
+    {
+        if (modules[i].name === name)
+        {
+            return modules[i].module;
+        }
+    }
+    return null;
+}
+
 module.exports = {
     /**
      * Allow custom dependencies to be added.
@@ -87,5 +99,6 @@ module.exports = {
      */
     getModules:function(){
         return modules;
-    }
+    },
+    getModuleByName:getModuleByName
 };
