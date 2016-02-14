@@ -16,3 +16,12 @@ moduleLoader.addModule("bot", bot);
 // Initialize modules.
 var rawModules = require("./modules.json");
 moduleLoader.loadModulesFromList(rawModules);
+
+
+
+
+var keys = moduleLoader.getModuleByName("keyboards");
+bot.onText(/\/start/, function (msg, match)
+{
+   bot.sendMessage(msg.from.id,"Test",keys.commandsKeyboard());
+});

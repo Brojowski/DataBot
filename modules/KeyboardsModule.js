@@ -3,21 +3,25 @@
  */
 var selectedKeyboard = 0;
 var keyboards = [];
-
-function Keyboard(name,keyboardArray){
-    return{
-        "name":name,
-        "keyboard":{
-            reply_markup:{
-                keyboard:keyboardArray
-            }
-        }
+var defaultKeyboard = {
+    reply_markup: {
+        keyboard: [
+            ["/test"]
+        ]
     }
+};
+
+function Keyboard(name, keyboardArray)
+{
+    return {
+        "name": name,
+        "keyboard": {reply_markup: {keyboard: keyboardArray}}
+    };
 }
 
-function addKeyboard(name,keyboardArray)
+function addKeyboard(name, keyboardArray)
 {
-    keyboards.push(Keyboard(name,keyboardArray));
+    keyboards.push(Keyboard(name, keyboardArray));
 }
 
 function generateFromModules()
@@ -31,34 +35,38 @@ function generateFromModules()
         {
             for (var fNumber = 0; fNumber < files.length; fNumber++)
             {
-                console.log(files[fNumber]);
-                fs.readFile(dir + "/" + files[fNumber], {encoding: "utf8"}, function (err, data)
+                //console.log(files[fNumber]);
+                if (files[fNumber] !== "KeyboardsModule.js")
                 {
-                    if (!err)
+                    fs.readFile(dir + "/" + files[fNumber], {encoding: "utf8"}, function (err, data)
                     {
-                        var regex = /\\(\/.*)\//g;
-                        commands.push.apply(commands, data.match(regex));
-                    }
-                    else
-                    {
-                        console.log(err);
-                    }
-                });
+                        if (!err)
+                        {
+                            var regex = /\\(\/.*)\//g;
+                            commands.push.apply(commands, data.match(regex));
+                        }
+                        else
+                        {
+                            console.log(err);
+                        }
+                    });
+                }
             }
-            addKeyboard("Commands Keyboard",[commands]);
+            addKeyboard("Commands Keyboard", [commands]);
         }
     });
 }
 
-function getKeyboardByName(name){
-    for (var i = 0; i < keyboards.length ; i++)
+function getKeyboardByName(name)
+{
+    for (var i = 0; i < keyboards.length; i++)
     {
         if (keyboards[i].name === name)
         {
-            return keyboards[i];
+            return keyboards[i].keyboard;
         }
     }
-    return getKeyboardByName("Commands Keyboard");
+    return defaultKeyboard;
 }
 
 module.exports = function ()
@@ -66,14 +74,29 @@ module.exports = function ()
     generateFromModules();
 
     return {
-        addKeyboard:addKeyboard,
-        commandsKeyboard:function()
+        /**
+         * @param keyboardArray a layout [[],[],[]]
+         */
+        addKeyboard: addKeyboard,
+        defaultKeyboard: function ()
+        {
+            return defaultKeyboard;
+        },
+        commandsKeyboard: function ()
         {
             return getKeyboardByName("Commands Keyboard");
         },
-        selectedKeyboard: function()
+        selectedKeyboard: function ()
         {
-            return keyboards[selectedKeyboard].keyboard;
-        }
+            if (keyboards[selectedKeyboard])
+            {
+                return keyboards[selectedKeyboard].keyboard;
+            }
+            else
+            {
+                return defaultKeyboard;
+            }
+        },
+        getKeyboardByName: getKeyboardByName
     };
 };
