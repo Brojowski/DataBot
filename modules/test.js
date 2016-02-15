@@ -3,7 +3,7 @@
  */
 var test = require("node-telegram-bot-api");
 
-module.exports = function (bot)
+module.exports = function (bot,keyboard)
 {
     if (bot)
     {
@@ -13,15 +13,7 @@ module.exports = function (bot)
     bot.onText(/\/test/, function (msg, match)
     {
         console.log("Test Triggered.");
-        bot.sendMessage(msg.from.id, "Test \n/1\n/2", {
-            reply_markup: {
-                keyboard: [
-                    ["/temp"],
-                    ["/day"],
-                    ["/test"]
-                ]
-            }
-        })
+        bot.sendMessage(msg.from.id, "Test \n/1\n/2",keyboard.defaultKeyboard())
     });
 
     //bot.on("inline_query",function(query)

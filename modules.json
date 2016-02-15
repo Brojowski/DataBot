@@ -1,24 +1,25 @@
 [
   {
-    "name":"weather",
-    "isActive":true,
-    "path":"./modules/GetWeather.js",
-    "dependencies":[
+    "name": "weather",
+    "isActive": true,
+    "path": "./modules/GetWeather.js",
+    "dependencies": [
       "bot"
     ]
   },
   {
-    "name":"keyboards",
-    "isActive":true,
-    "path":"./modules/KeyboardsModule.js",
-    "dependencies":[]
+    "name": "keyboards",
+    "isActive": true,
+    "path": "./modules/KeyboardsModule.js",
+    "dependencies": []
   },
   {
-    "name":"test",
-    "isActive":true,
-    "path":"./modules/test.js",
-    "dependencies":[
-      "bot"
+    "name": "test",
+    "isActive": true,
+    "path": "./modules/test.js",
+    "dependencies": [
+      "bot",
+      "keyboards"
     ]
   }
 ]
