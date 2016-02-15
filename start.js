@@ -10,7 +10,7 @@ var config = require("./config.json");
 
 var moduleLoader = require("./ModuleLoader.js");
 
-// Add the telegram as a bot.
+// Add the telegram bot as a module.
 moduleLoader.addModule("bot", bot);
 
 // Initialize modules.
