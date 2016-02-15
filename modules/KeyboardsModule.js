@@ -24,7 +24,6 @@ function addKeyboard(name, keyboardArray)
     keyboards.push(Keyboard(name, keyboardArray));
 }
 
-// TODO: Rewrite auto command generation from files.
 function generateFromModules()
 {
     var commands = [];
@@ -43,8 +42,10 @@ function generateFromModules()
                     {
                         if (!err)
                         {
-                            var regex = /\\(\/.*)\//g;
-                            commands.push.apply(commands, data.match(regex));
+                            var regex = /\/\\(\/.*)\//g;
+                            while ((match = regex.exec(data))!=null) {
+                                commands.push([match[1]]);
+                            }
                         }
                         else
                         {
@@ -53,7 +54,7 @@ function generateFromModules()
                     });
                 }
             }
-            addKeyboard("Commands Keyboard", [commands]);
+            addKeyboard("Commands Keyboard", commands);
         }
     });
 }
@@ -68,6 +69,19 @@ function getKeyboardByName(name)
         }
     }
     return defaultKeyboard;
+}
+
+function setSelectedKeyboard(name)
+{
+    for (var i = 0; i < keyboards.length; i++)
+    {
+        if (keyboards[i].name === name)
+        {
+            selectedKeyboard = i;
+            return true;
+        }
+    }
+    return false;
 }
 
 module.exports = function ()
@@ -98,6 +112,7 @@ module.exports = function ()
                 return defaultKeyboard;
             }
         },
-        getKeyboardByName: getKeyboardByName
+        getKeyboardByName: getKeyboardByName,
+        setSelectedKeyboard:setSelectedKeyboard
     };
 };
