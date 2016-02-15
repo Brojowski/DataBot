@@ -93,14 +93,23 @@ module.exports = function ()
          * @param keyboardArray a layout [[],[],[]]
          */
         addKeyboard: addKeyboard,
+        /**
+         * @returns the default keyboard as an bot option {{reply_markup: {keyboard: *[]}}}
+         */
         defaultKeyboard: function ()
         {
             return defaultKeyboard;
         },
+        /**
+         * @returns the keyboard of commands generated from the modules.
+         */
         commandsKeyboard: function ()
         {
             return getKeyboardByName("Commands Keyboard");
         },
+        /**
+         * @returns the selectedKeyboard or the defaultKeyboard if none are selected
+         */
         selectedKeyboard: function ()
         {
             if (keyboards[selectedKeyboard])
@@ -112,7 +121,15 @@ module.exports = function ()
                 return defaultKeyboard;
             }
         },
+        /**
+         * @param name: the name to search
+         * @return the keyboard with the search name or the default if the name was not found
+         */
         getKeyboardByName: getKeyboardByName,
+        /**
+         * @param name: the name of the keyboard to be selected
+         * @return boolean success, true if the keyboard exists
+         */
         setSelectedKeyboard:setSelectedKeyboard
     };
 };
